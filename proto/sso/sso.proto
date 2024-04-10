@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "assilbekov.sso.v1;ssoy1";
+
+service Auth {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc isAdmin(isAdminRequest) returns (isAdminResponse);
+}
+
+message RegisterRequest {
+  // Email of the user to register
+  string email = 1;
+  // Password of the user to register
+  string password = 2;
+}
+
+message RegisterResponse {
+  // ID of the user
+  int64 user_id = 1;
+}
+
+message LoginRequest {
+  // Email of the user to login
+  string email = 1;
+  // Password of the user to login
+  string password = 2;
+  // App ID of the application
+  int32 app_id = 3;
+}
+
+message LoginResponse {
+  // Token of the user
+  string token = 1;
+}
+
+message isAdminRequest {
+  // ID of the user
+  int64 user_id = 1;
+}
+
+message isAdminResponse {
+  // Is user admin
+  bool is_admin = 1;
+}
